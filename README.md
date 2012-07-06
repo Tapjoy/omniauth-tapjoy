@@ -93,6 +93,22 @@ devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks"
 If you aren't using Devise, you can either connect to the oauth server directly,
 or directly use omniauth: [https://github.com/intridea/omniauth](https://github.com/intridea/omniauth)
 
+Information available:
+
+```json
+{
+  "id": "63be812b-706d-44c9-9e47-742511c6f939",
+  "email": "jeff@tapjoy.com",
+  "first_name": "Jeff",
+  "last_name": "Dickey",
+  "created_at": "2012-02-08T05:36:09Z",
+  "facebook_id": "42004440",
+  "country": "United States",
+  "time_zone": "Pacific Time (US & Canada)",
+  "is_employee": true
+}
+```
+
 ## Example
 
 For an example of this in use, check the wheeler board: [https://github.com/Tapjoy/wheeler_board](https://github.com/Tapjoy/wheeler_board)
