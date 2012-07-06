@@ -20,7 +20,7 @@ Create `config/initializers/omniauth.rb`:
 
 ```ruby
 Rails.application.config.middleware.use OmniAuth::Builder do
-  provider :tapjoy, ENV['TAPJOY_KEY'] || '617f193ee0c16d47d33d68e7f446eb48714403da8ceab86e5d9d8f084d4ebc08', ENV['TAPJOY_SECRET'] || '74ceaf754a0aab719a725fdd7f8571cf63c3e44a2af2a2a1c6546090a4c182ae'
+  provider :tapjoy, TAPJOY_KEY, TAPJOY_SECRET
 end
 ```
 
