@@ -4,6 +4,47 @@ Status](https://secure.travis-ci.org/Tapjoy/omniauth-tapjoy.png)](http://travis-
 
 This is an omniauth plugin that can be used to connect to Tapjoy.
 
+## Installation
+
+Add this line to your application's Gemfile:
+
+```ruby
+gem 'omniauth-tapjoy'
+```
+
+And then execute:
+
+    $ bundle
+
+Create `config/initializers/omniauth.rb`:
+
+```ruby
+Rails.application.config.middleware.use OmniAuth::Builder do
+  provider :tapjoy, ENV['TAPJOY_KEY'] || '617f193ee0c16d47d33d68e7f446eb48714403da8ceab86e5d9d8f084d4ebc08', ENV['TAPJOY_SECRET'] || '74ceaf754a0aab719a725fdd7f8571cf63c3e44a2af2a2a1c6546090a4c182ae'
+end
+```
+
+Now when you hit the `/auth/tapjoy` on your server, it will redirect to `oauth.tapjoy.com` then back to `/auth/tapjoy/callback` with credentials.
+We will now setup this callback route
+
+Add this line to `config/routes.rb`:
+
+```ruby
+match '/auth/tapjoy/callback' => 'user_sessions#create'
+```
+
+Create the `app/controllers/user_sessions_controller.rb`
+
+```ruby
+class UserSessionsController < ApplicationController
+  def create
+    # This likely needs more logic to do things such as creating new users
+    user = User.find(request.env['omniauth.auth']['uid'])
+    session[:user_id] = user.id # or however you log a user in
+  end
+end
+```
+
 ## Installation with Devise
 
 If you are using Devise, this is how you can use Tapjoy as your OAUTH provider.
@@ -17,6 +58,7 @@ gem 'omniauth-tapjoy'
 And then execute:
 
     $ bundle
+
 
 Add this line to `config/intializers/devise.rb`:
 
