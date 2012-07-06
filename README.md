@@ -93,7 +93,7 @@ devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks"
 If you aren't using Devise, you can either connect to the oauth server directly,
 or directly use omniauth: [https://github.com/intridea/omniauth](https://github.com/intridea/omniauth)
 
-Information available:
+## Information available
 
 ```json
 {
