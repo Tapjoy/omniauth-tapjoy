@@ -13,7 +13,7 @@ Gem::Specification.new do |gem|
   gem.test_files    = gem.files.grep(%r{^(test|spec|features)/})
   gem.name          = "omniauth-tapjoy"
   gem.require_paths = ["lib"]
-  gem.version       = '1.4.2'
+  gem.version       = '1.4.3'
 
   gem.add_dependency 'omniauth', '~> 1.0'
   gem.add_runtime_dependency 'omniauth-oauth2'
