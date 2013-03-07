@@ -23,7 +23,7 @@ describe OmniAuth::Strategies::Tapjoy do
     end
 
     it 'should use the correct staging site' do
-      stub_const("ENV", { 'TAPJOY_USE_STAGING_AUTH' => 'true' })
+      stub_const("ENV", { 'TAPJOY_AUTH_ENV' => 'staging' })
       # Can't test the subject directly here as the site was set on class load, but you could still overwrite
       # it via an options hash if you wanted to
       OmniAuth::Strategies::Tapjoy.site.should eq('https://mystique-staging.herokuapp.com')
@@ -42,7 +42,7 @@ describe OmniAuth::Strategies::Tapjoy do
     end
 
     it 'should use the correct staging authorize url' do
-      stub_const("ENV", { 'TAPJOY_USE_STAGING_AUTH' => 'true' })
+      stub_const("ENV", { 'TAPJOY_AUTH_ENV' => 'staging' })
       # Can't test the subject directly here as the url was set on class load, but you could still overwrite
       # it via an options hash if you wanted to
       OmniAuth::Strategies::Tapjoy.authorize_path.should eq('/oauth/authorize')
