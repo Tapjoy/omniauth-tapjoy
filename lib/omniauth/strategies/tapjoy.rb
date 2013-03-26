@@ -5,10 +5,19 @@ module OmniAuth
     class Tapjoy < OmniAuth::Strategies::OAuth2
       option :name, :tapjoy
 
+      # If you overwrite ENV settings in your application, for example in a rails environment setup, you 
+      # will have to call OmniAuth::Strategies::Tapjoy.reconfigure to propagate your changes.
+      def self.reconfigure
+        option :client_options, {
+          :site => site,
+          :authorize_path => authorize_path
+        }
+      end
+
       def self.site
         if ENV['TAPJOY_AUTH_SITE']
           ENV['TAPJOY_AUTH_SITE']
-        elsif ENV['TAPJOY_USE_STAGING_AUTH']
+        elsif ENV['TAPJOY_AUTH_ENV'] == 'staging'
           'https://mystique-staging.herokuapp.com'
         else
           "https://oauth.tapjoy.com"
@@ -18,7 +27,7 @@ module OmniAuth
       def self.authorize_path
         if ENV['TAPJOY_AUTH_PATH']
           ENV['TAPJOY_AUTH_PATH'] 
-        elsif  ENV['TAPJOY_USE_STAGING_AUTH']
+        elsif ENV['TAPJOY_AUTH_ENV'] == 'staging'
           # Staging path is currently the same as production
           "/oauth/authorize"
         else
@@ -26,10 +35,7 @@ module OmniAuth
         end
       end
 
-      option :client_options, {
-        :site => site,
-        :authorize_path => authorize_path
-      }
+      reconfigure
 
       uid { raw_info["id"] }
 

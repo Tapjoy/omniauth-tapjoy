@@ -90,6 +90,15 @@ Set the route to use the callback you just created:
 devise_for :users, controllers: { omniauth_callbacks: "users/omniauth_callbacks" }
 ```
 
+Environment settings passed in at application start will always be respected, but if you wish to automatically use the staging environment in development, you may add the following lines to your `config/environments/development.rb`
+
+```ruby
+
+ENV['TAPJOY_AUTH_ENV'] ||= "staging"
+OmniAuth::Strategies::Tapjoy.reconfigure
+
+```
+
 If you aren't using Devise, you can either connect to the oauth server directly,
 or directly use omniauth: [https://github.com/intridea/omniauth](https://github.com/intridea/omniauth)
 
